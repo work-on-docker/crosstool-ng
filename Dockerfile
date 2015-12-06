@@ -15,8 +15,8 @@ RUN \
 
 RUN \
  mkdir /home/firemiles && \
- groupadd -r firemiles -g 433  && \
- useradd -u 431 -r -g firemiles -d /home/firemiles -s /sbin/nologin -c "Docker image user" firemiles  && \
+ groupadd -r firemiles -g 1000  && \
+ useradd -u 1000 -r -g firemiles -d /home/firemiles -s /sbin/nologin -c "Docker image user" firemiles  && \
  chown -R firemiles:firemiles /home/firemiles && \
  adduser firemiles sudo && \
  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
