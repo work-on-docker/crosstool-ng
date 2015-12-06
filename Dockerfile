@@ -21,13 +21,12 @@ RUN \
  adduser firemiles sudo && \
  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-WORKDIR /opt/toolchain/
-RUN chown -R firemiles:firemiles /opt/toolchain/
+WORKDIR /home/firemiles
 USER firemiles
 
 RUN git clone -b 1.22 https://github.com/crosstool-ng/crosstool-ng.git 
 
-WORKDIR /opt/toolchain/crosstool-ng
+WORKDIR /home/firemiles/crosstool-ng
 
 RUN \
  ./bootstrap && ./configure && make && sudo make install && rm -rf ../crosstool-ng/ 
