@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM debian:wheezy
 
 MAINTAINER firemilesxu@gmail.com firemiles 
 
@@ -10,7 +10,21 @@ MAINTAINER firemilesxu@gmail.com firemiles
 RUN \
  apt-get update && \
  apt-get dist-upgrade -y && \
- apt-get install -y git autoconf build-essential gperf bison flex texinfo libtool libncurses5-dev wget gawk libc6-dev help2man unzip libtool && \
+ apt-get install -y \
+ git \
+ autoconf \
+ build-essential \
+ gperf \
+ bison \
+ flex \
+ texinfo \
+ libtool \
+ libncurses5-dev \
+ wget \
+ gawk \
+ libc6-dev \
+ help2man \
+ unzip && \
  apt-get clean
 
 RUN \
