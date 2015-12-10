@@ -9,6 +9,7 @@ MAINTAINER firemilesxu@gmail.com firemiles
 # install package
 RUN apt-get update && apt-get install -y \
     git \
+    sudo \
     autoconf \
     build-essential \
     gperf \
@@ -42,7 +43,7 @@ RUN git clone -b 1.22 https://github.com/crosstool-ng/crosstool-ng.git \
 &&  ./bootstrap \
 &&  ./configure \
 &&  make \
-&&  gosu make install \
+&&  sudo make install \
 &&  rm -rf ../crosstool-ng/ 
 
 # work like command
