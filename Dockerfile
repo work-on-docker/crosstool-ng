@@ -6,7 +6,7 @@ MAINTAINER firemilesxu@gmail.com firemiles
 # crosstool-NG
 #  see https://github.com/crosstool-ng/crosstool-ng.git
 # ---
-
+# install package
 RUN apt-get update && apt-get install -y \
     sudo \
     git \
@@ -26,25 +26,25 @@ RUN apt-get update && apt-get install -y \
 &&  apt-get clean \
 &&  rm -rf /var/lib/apt/lists/*
 
-RUN \
- mkdir /home/firemiles && \
- groupadd -r firemiles -g 1000  && \
- useradd -u 1000 -r -g firemiles -d /home/firemiles -s /bin/bash -c "Docker image user" firemiles  && \
- chown -R firemiles:firemiles /home/firemiles && \
- adduser firemiles sudo && \
- echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+# add user firemiles
+RUN mkdir /home/firemiles \
+&&  groupadd -r firemiles -g 1000 \
+&&  useradd -u 1000 -r -g firemiles -d /home/firemiles -s /bin/bash -c "Docker image user" firemiles \
+&&  chown -R firemiles:firemiles /home/firemiles \
+&&  adduser firemiles sudo \
+&&  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 WORKDIR /home/firemiles
 USER firemiles
 
-RUN git clone -b 1.22 https://github.com/crosstool-ng/crosstool-ng.git 
-
-WORKDIR /home/firemiles/crosstool-ng
-
-RUN \
- ./bootstrap && ./configure && make && sudo make install && rm -rf ../crosstool-ng/ 
-
-WORKDIR /home/firemiles
+# build and install
+RUN git clone -b 1.22 https://github.com/crosstool-ng/crosstool-ng.git \
+&&  cd /home/firemiles/crosstool-ng \
+&&  ./bootstrap \
+&&  ./configure \
+&&  make \
+&&  sudo make install \
+&&  rm -rf ../crosstool-ng/ 
 
 # work like command
 ENTRYPOINT ["ct-ng"]
