@@ -49,3 +49,11 @@ RUN git clone -b 1.22 https://github.com/crosstool-ng/crosstool-ng.git \
 # work like command
 ENTRYPOINT ["ct-ng"]
 
+# add commit label for microbadger
+ARG VCS_REF
+
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.license=MIT \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/work-on-docker/crosstool-ng"
+
